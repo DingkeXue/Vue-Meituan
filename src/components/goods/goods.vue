@@ -17,6 +17,8 @@
             <img class="icon" :src="item.icon" v-if="item.icon">
             {{item.name}}
           </p>
+          <!--显示购物车中个数-->
+          <i class="num" v-show="calculateCount(item.spus)">{{calculateCount(item.spus)}}</i>
         </li>
       </ul>
     </div>
@@ -51,26 +53,39 @@
                   <span class="unit">￥{{food.unit}}</span>
                 </p>
               </div>
+              <!--添加商品按钮-->
+              <div class="cartcontrol-wrapper">
+                <app-cart-control :food="food"></app-cart-control>
+              </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
+    <!--底部购物车-->
+    <app-shop-cart :poiInfo="poiInfo" :selectFoods="selectFoods"></app-shop-cart>
   </div>
 </template>
 
 <script>
   import BScroll from 'better-scroll'
+  import ShopCart from '../shopcart/ShopCart'
+  import CartControl from '../cartcontrol/CartControl'
   export default {
     data() {
       return {
         container: {},
         goods: [],
+        poiInfo: {},
         listHeight: [],
         menuScroll: {},
         foodScroll: {},
         scrollY: 0
       }
+    },
+    components: {
+      'app-shop-cart': ShopCart,
+      'app-cart-control': CartControl
     },
     methods: {
       icon_bg(url) {
@@ -100,13 +115,21 @@
           height += item.clientHeight;
           this.listHeight.push(height);
         }
-        // console.log(this.listHeight);
       },
       selectMenu(index) {
         let foodList = this.$refs.foodScroll.getElementsByClassName('food-list-hook');
         let element = foodList[index];
         // 滚动到对应的具体商品位置
         this.foodScroll.scrollToElement(element, 200);
+      },
+      calculateCount(spus) {
+        let num = 0;
+        spus.forEach(item => {
+          if (item.count > 0) {
+            num += item.count;
+          }
+        });
+        return num;
       }
     },
     created() {
@@ -118,6 +141,7 @@
           if (res.code === 0) {
             this.container = res.data.container_operation_source;
             this.goods = res.data.food_spu_tags;
+            this.poiInfo = res.data.poi_info;
             // DOM　已经更新完
             this.$nextTick(() => {
               // 执行滚动方法
@@ -141,6 +165,18 @@
           }
         }
         return 0;
+      },
+      // 添加商品时遍历所以商品并找出添加的具体商品
+      selectFoods() {
+        let foods = [];
+        this.goods.forEach((myFood) => {
+          myFood.spus.forEach((item) => {
+            if (item.count > 0) {
+              foods.push(item);
+            }
+          })
+        });
+        return foods;
       }
     }
   }
@@ -152,7 +188,7 @@
     display: flex;
     width: 100%;
     position: absolute;
-    top: 190px;
+    top: 200px;
     bottom: 51px;
     overflow: hidden;
   }
@@ -177,6 +213,7 @@
   .goods .menu-item {
     padding: 16px 5px 15px 10px;
     border-bottom: 1px solid #E4E4E4;
+    position: relative;
   }
 
   .goods .menu-item .text {
@@ -266,6 +303,11 @@
   .food-list .price {
     font-size: 0;
   }
+
+  .food-list .product {
+    height: 15px;
+    margin-bottom: 6px;
+  }
   
   .food-list .text {
     font-size: 14px;
@@ -286,6 +328,28 @@
 
   .goods .menu-item:first-child.current {
     margin-top: 1px;
+  }
+
+  /* 添加按钮 */
+  .cartcontrol-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  /* 左边导航栏显示购物车中数量 */
+  .menu-item .num {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    top: 16px;
+    right: 5px;
+    color: white;
+    background: red;
+    text-align: center;
+    font-size: 10px;
+    line-height: 13px;
+    position: absolute;
   }
 
 

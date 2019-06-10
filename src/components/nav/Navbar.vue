@@ -18,19 +18,22 @@
   display: flex;
   height: 40px;
   line-height: 40px;
+  width: 100%;
   justify-content: space-around;
   border-bottom: 1px solid #e4e4e4;
   }
+
 .nav-item {
   text-decoration: none;
   color: #666666;
   text-align: center;
-  font-size: 14px;
   position: relative;
 }
+
 .nav .active {
-  color: #FFBB22;
+  color: #ffbb22;
 }
+
 .nav .active .line {
   border-bottom: 1px solid #FFBB22;
   width: 20px;

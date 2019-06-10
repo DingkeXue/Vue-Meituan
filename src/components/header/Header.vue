@@ -168,6 +168,10 @@
     box-sizing: border-box;
   }
 
+  .icon-arrow_lift {
+    color: white;
+  }
+
   .header .search-wrapper .search-icon {
     width: 28px;
     height: 31px;
@@ -435,7 +439,7 @@
   /* 公告详情过度效果 */
   .bulletin-detail-enter-active,
   .bulletin-detail-leave-active {
-    transition: 2s all;
+    transition: 1s all;
   }
 
   .bulletin-detail-enter,
