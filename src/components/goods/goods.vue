@@ -32,11 +32,12 @@
           </div>
         </li>
         <!--具体分类-->
-        <li class="food-list food-list-hook" v-for="(item, index) in goods" :key="index">
+        <li class="food-list food-list-hook" v-for="(item, index) in goods"
+            :key="index">
           <h3 class="title">{{item.name}}</h3>
           <!--具体分类下面的商品-->
           <ul>
-            <li class="food-item" v-for="(food, index) in item.spus" :key="index">
+            <li class="food-item" v-for="(food, index) in item.spus" :key="index"  @click="showDetail(food)">
               <!--商品图片-->
               <div class="icon" :style="icon_bg(food.picture)"></div>
               <!--商品具体描述-->
@@ -64,6 +65,7 @@
     </div>
     <!--底部购物车-->
     <app-shop-cart :poiInfo="poiInfo" :selectFoods="selectFoods"></app-shop-cart>
+    <app-product-detail :food="selectFood" ref="foodView"></app-product-detail>
   </div>
 </template>
 
@@ -71,6 +73,7 @@
   import BScroll from 'better-scroll'
   import ShopCart from '../shopcart/ShopCart'
   import CartControl from '../cartcontrol/CartControl'
+  import ProductDetail from '../productDetail/ProductDetail'
   export default {
     data() {
       return {
@@ -80,12 +83,14 @@
         listHeight: [],
         menuScroll: {},
         foodScroll: {},
-        scrollY: 0
+        scrollY: 0,
+        selectFood: {}
       }
     },
     components: {
       'app-shop-cart': ShopCart,
-      'app-cart-control': CartControl
+      'app-cart-control': CartControl,
+      'app-product-detail': ProductDetail
     },
     methods: {
       icon_bg(url) {
@@ -130,6 +135,11 @@
           }
         });
         return num;
+      },
+      showDetail(food) {
+        this.selectFood = food;
+
+        this.$refs.foodView.showView();
       }
     },
     created() {

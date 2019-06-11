@@ -2,13 +2,13 @@
   <div class="cart-control">
     <!--现实减号和购物数量时动画-->
    <transition name="move">
-     <div class="cart-decrease icon-remove_circle_outline" v-show="food.count" @click="decreaseCart"></div>
+     <div class="cart-decrease icon-remove_circle_outline" v-show="food.count" @click.stop.prevent="decreaseCart"></div>
    </transition>
     <div class="cart-count" v-show="food.count">
       {{food.count}}
       <i class="bg"></i>
     </div>
-    <div class="cart-add icon-add_circle" @click="increaseCart">
+    <div class="cart-add icon-add_circle" @click.stop.prevent="increaseCart">
       <i class="bg"></i>
     </div>
   </div>

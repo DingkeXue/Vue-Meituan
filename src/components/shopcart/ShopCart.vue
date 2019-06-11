@@ -39,9 +39,6 @@
                 <p class="unit" v-if="food.unit">
                   {{food.unit}}
                 </p>
-                <div class="description" v-else="food.description">
-                  {{food.description}}
-                </div>
               </div>
               <div class="desc-right">
                 ￥{{food.min_price}}
@@ -320,11 +317,11 @@
   }
 
   .food-item .desc-wrapper {
-    width: 240px;
+    width: 58%;
   }
 
   .food-item .desc-left {
-    width: 170px;
+    width: 42%;
   }
 
   .desc-left .name {
@@ -332,15 +329,9 @@
     margin-bottom: 8px;
   }
 
-  .desc-left .unit,
-  .desc-left .description {
+  .desc-left .unit {
     font-size: 12px;
     color: #b4b4b4;
-  }
-
-  .desc-left .description {
-    overflow: hidden;
-    height: 12px;
   }
 
   .desc-wrapper .desc-right {
