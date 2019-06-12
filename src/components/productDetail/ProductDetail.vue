@@ -157,7 +157,7 @@
     position: absolute;
     text-align: center;
     color: white;
-    background: #7f7f7f;
+    background: #999999;
     font-size: 30px;
   }
 

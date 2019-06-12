@@ -46,9 +46,9 @@ export default  {
   .cart-decrease,
   .cart-add {
     display: inline-block;
-    width: 26px;
-    height: 26px;
-    font-size: 26px;
+    width: 28px;
+    height: 28px;
+    font-size: 28px;
   }
 
   .cart-decrease {
@@ -56,8 +56,8 @@ export default  {
   }
 
   .cart-add .bg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     background: black;
     position: absolute;
@@ -70,9 +70,9 @@ export default  {
     display: inline-block;
     width: 25px;
     text-align: center;
-    font-size: 12px;
+    font-size: 18px;
     line-height: 26px;
-    vertical-align: top;
+    vertical-align: bottom;
   }
   
   .cart-add {

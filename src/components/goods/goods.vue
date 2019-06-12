@@ -48,10 +48,10 @@
                   <span class="saled">{{food.month_saled}}</span>
                   <span class="praise">{{food.praise_content}}</span>
                 </div>
-                <img class="product" :src="food.product_label_picture">
+                <img class="product" v-if="food.product_label_picture" :src="food.product_label_picture">
                 <p class="price">
-                  <span class="text">￥{{food.min_price}}</span>
-                  <span class="unit">￥{{food.unit}}</span>
+                  <span class="text">¥{{food.min_price}}</span>
+                  <span class="unit">/{{food.unit}}</span>
                 </p>
               </div>
               <!--添加商品按钮-->
@@ -97,7 +97,9 @@
         return 'background-image: url(' + url + ')'
       },
       initScroll() {
-        this.menuScroll = new BScroll(this.$refs.menuScroll);
+        this.menuScroll = new BScroll(this.$refs.menuScroll, {
+          click: true
+        });
         this.foodScroll = new BScroll(this.$refs.foodScroll, {
           probeType: 3,
           click: true
@@ -198,8 +200,9 @@
     display: flex;
     width: 100%;
     position: absolute;
-    top: 200px;
+    top: 210px;
     bottom: 51px;
+    left: 0;
     overflow: hidden;
   }
 
@@ -215,23 +218,27 @@
 
   .goods ul {
     list-style: none;
-    padding-left: 0;
+    padding-left: 10px;
     margin-top: 0;
   }
 
   /* 左边导航栏 */
   .goods .menu-item {
-    padding: 16px 5px 15px 10px;
-    border-bottom: 1px solid #E4E4E4;
+    padding: 16px 5px 15px 0;
     position: relative;
   }
 
   .goods .menu-item .text {
     font-size: 13px;
-    color: #333333;
+    color: #666666;
     line-height: 16px;
     vertical-align: middle;
     overflow: hidden;
+    /* 超出部分隐藏 */
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 
   .goods .menu-item .icon {
@@ -320,7 +327,7 @@
   }
   
   .food-list .text {
-    font-size: 14px;
+    font-size: 18px;
     color: #fb4e44;
   }
   
@@ -343,7 +350,7 @@
   /* 添加按钮 */
   .cartcontrol-wrapper {
     position: absolute;
-    right: 0;
+    right: 10px;
     bottom: 0;
   }
 

@@ -21,7 +21,7 @@
 <style scoped>
 .nav {
   display: flex;
-  height: 40px;
+  height: 45px;
   line-height: 40px;
   width: 100%;
   justify-content: space-around;

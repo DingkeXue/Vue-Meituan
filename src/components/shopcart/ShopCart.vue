@@ -36,9 +36,12 @@
                 <p class="name">
                   {{food.name}}
                 </p>
-                <p class="unit" v-if="food.unit">
-                  {{food.unit}}
-                </p>
+                <!--<p class="unit" v-if="food.unit">-->
+                  <!--{{food.unit}}-->
+                <!--</p>-->
+                <!--<p class="description" v-if="food.description">-->
+                  <!--{{food.description}}-->
+                <!--</p>-->
               </div>
               <div class="desc-right">
                 ￥{{food.min_price}}
@@ -148,9 +151,10 @@
 
 <style scoped>
   @import url(../../common/css/icon.css);
+
   .shopcart-wrapper {
     width: 100%;
-    height: 55px;
+    height: 51px;
     background: #514f4f;
     position: fixed;
     left: 0;
@@ -316,22 +320,31 @@
     float: left;
   }
 
-  .food-item .desc-wrapper {
-    width: 58%;
-  }
-
+  .food-item .desc-wrapper,
   .food-item .desc-left {
-    width: 42%;
+    width: 60%;
   }
 
   .desc-left .name {
     font-size: 16px;
-    margin-bottom: 8px;
+    height: 24px;
+    /*超出部分隐藏*/
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
   }
 
-  .desc-left .unit {
+  .desc-left .unit,
+  .desc-left .description {
     font-size: 12px;
     color: #b4b4b4;
+  }
+
+  .desc-left .description {
+    /*超出部分隐藏*/
+    overflow: hidden;
+    height: 12px;
   }
 
   .desc-wrapper .desc-right {
