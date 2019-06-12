@@ -6,7 +6,7 @@
     </div>
     <!--navbar-->
     <div class="navbar">
-      <app-navbar></app-navbar>
+      <app-navbar :commentNum="commentNum"></app-navbar>
     </div>
     <!--content-->
     <div class="content">
@@ -26,16 +26,32 @@ export default {
   },
   data() {
     return {
-      poiInfo: {}
+      poiInfo: {},
+      commentNum: 0
     }
   },
   created() {
+    // 获取商品数据
     fetch('/api/goods')
       .then((response) => {
         return response.json();
       })
       .then((res) => {
         this.poiInfo = res.data.poi_info;
+      })
+      .catch(() => {
+        alert('数据请求出错啦');
+      });
+    // 获取评价数据
+    fetch('/api/ratings')
+      .then(response => {
+        return response.json();
+      })
+      .then(res => {
+        this.commentNum = res.data.comment_num;
+      })
+      .catch(() => {
+        alert('数据请求出错啦');
       })
   }
 }
