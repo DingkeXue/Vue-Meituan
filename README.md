@@ -1,7 +1,7 @@
 # app
 
 > A Vue.js project
-> 美团外卖页面，实现基本的点餐、查看评论和商家功能。
+> 美团外卖单页页面，使用 vue-router 实现基本的点餐、查看评论和商家功能。
 > 涉及到的技术有：vue vue-router fetch nodejs webpack better-scroll 等 。
 > 使用 flex、css transition、vue transition、vue keep-alive、better-scroll 插件等来改善用户体验。
 > 将 购物车、购买按钮、分隔符组件化来重复利用组件。
