@@ -36,12 +36,6 @@
                 <p class="name">
                   {{food.name}}
                 </p>
-                <!--<p class="unit" v-if="food.unit">-->
-                  <!--{{food.unit}}-->
-                <!--</p>-->
-                <!--<p class="description" v-if="food.description">-->
-                  <!--{{food.description}}-->
-                <!--</p>-->
               </div>
               <div class="desc-right">
                 ￥{{food.min_price}}
@@ -175,7 +169,7 @@
     text-align: center;
     font-weight: bold;
   }
-  
+
   .logo-wrapper {
     width: 50px;
     height: 50px;
@@ -212,21 +206,21 @@
     line-height: 31px;
     margin-top: 0;
   }
-  
+
   /* 货物车里有物品时状态 */
   .heightlight {
     color: #fff161;
   }
-  
+
   .logo.heightlight,
   .content-right.heightlight {
     color: #2D2B2A;
   }
-  
+
   .tip.heightlight {
     line-height: 12px;
   }
-  
+
   .content-right.heightlight,
   .logo-wrapper.heightlight {
     background: #ffd161;

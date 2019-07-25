@@ -31,7 +31,9 @@ export default  {
       }
     },
     decreaseCart() {
-      this.food.count--;
+      if (this.food.count > 0) {
+        this.food.count--;
+      }
     }
   }
 }
@@ -42,7 +44,7 @@ export default  {
   .cart-control {
     font-size: 0;
   }
-  
+
   .cart-decrease,
   .cart-add {
     display: inline-block;
@@ -65,7 +67,7 @@ export default  {
     top: 3px;
     z-index: -1;
   }
-  
+
   .cart-count {
     display: inline-block;
     width: 25px;
@@ -74,7 +76,7 @@ export default  {
     line-height: 26px;
     vertical-align: bottom;
   }
-  
+
   .cart-add {
     color: #ffd161;
     position: relative;
