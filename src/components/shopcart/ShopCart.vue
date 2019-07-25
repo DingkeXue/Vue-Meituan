@@ -18,9 +18,11 @@
     <div class="content-right" :class="{'heightlight': totalCount > 0}">{{payStr}}</div>
     <!--购物车详情-->
     <div class="shopcart-list" v-show="listShow" :class="{'show': listShow}">
+      <!--购物车优惠信息-->
       <div class="list-top" v-if="poiInfo.discounts2">
         {{poiInfo.discounts2[0].info}}
       </div>
+      <!--购物车头部-->
       <div class="list-header">
         <div class="title">购物车</div>
         <div class="empty" @click="clearAll">
@@ -28,6 +30,7 @@
           <span>清空购物车</span>
         </div>
       </div>
+      <!--购物车内容区-->
       <div class="list-content" ref="listContent">
         <ul>
           <li class="food-item" v-for="(food, index) in selectFoods" :key="index">
@@ -42,6 +45,7 @@
               </div>
             </div>
             <div class="cartcontrol-wrapper">
+              <!--加减号组件-->
               <app-cart-control :food="food"></app-cart-control>
             </div>
           </li>
@@ -56,91 +60,98 @@
 </template>
 
 <script>
-  import BScroll from 'better-scroll'
-  import CartControl from '../cartcontrol/CartControl'
-  export default {
-    data() {
-      return {
-        fold: true
-      }
+import BScroll from 'better-scroll'
+import CartControl from '../cartcontrol/CartControl'
+export default {
+  data() {
+    return {
+      fold: true
+    }
+  },
+  components: {
+    'app-cart-control': CartControl
+  },
+  props: {
+    poiInfo: {
+      type: Object,
+      default: {}
     },
-    components: {
-      'app-cart-control': CartControl
-    },
-    props: {
-      poiInfo: {
-        type: Object,
-        default: {}
-      },
-      selectFoods: {
-        type: Array,
-        default() {
-          return []
-        }
-      }
-    },
-    computed: {
-      totalCount() {
-        let num = 0;
-        this.selectFoods.forEach((item) => {
-          num += item.count;
-          // console.log(num);
-        });
-        return num;
-      },
-      totalPrice() {
-        let total = 0;
-        this.selectFoods.forEach((item) => {
-          total += item.count * parseFloat(item.min_price);
-        });
-        return total;
-      },
-      payStr() {
-        if (this.totalCount > 0) {
-          return "去结算";
-        } else {
-          return this.poiInfo.min_price_tip;
-        }
-      },
-      listShow() {
-        if (!this.totalCount) {
-          this.fold = true;
-          return false;
-        } else {
-          let show = !this.fold;
-          if (show) {
-            this.$nextTick(() => {
-              if (!this.shopScroll) {
-                this.shopScroll = new BScroll(this.$refs.listContent, {
-                  click: true
-                })
-              } else {
-                this.shopScroll.refresh();
-              }
-            });
-          }
-          return show;
-        }
-      }
-    },
-    methods: {
-      toggleList() {
-        if (!this.totalCount) {
-          return;
-        } else {
-          this.fold = !this.fold;
-        }
-      },
-      hideMask() {
-        this.fold = true;
-      },
-      clearAll() {
-        this.selectFoods.forEach(food => {
-          food.count = 0;
-        })
+    selectFoods: {
+      type: Array,
+      default() {
+        return []
       }
     }
+  },
+  computed: {
+    // 计算购物车总数
+    totalCount() {
+      let num = 0;
+      this.selectFoods.forEach((item) => {
+        num += item.count;
+        // console.log(num);
+      });
+      return num;
+    },
+    // 计算总价格
+    totalPrice() {
+      let total = 0;
+      this.selectFoods.forEach((item) => {
+        total += item.count * parseFloat(item.min_price);
+      });
+      return total;
+    },
+    // 当购物车内有物品时返回 去结算
+    payStr() {
+      if (this.totalCount > 0) {
+        return "去结算";
+      } else {
+        return this.poiInfo.min_price_tip;
+      }
+    },
+    // 控制购物车中物品的展示
+    listShow() {
+      if (!this.totalCount) {
+        this.fold = true;
+        return false;
+      } else {
+        let show = !this.fold;
+        if (show) {
+          this.$nextTick(() => {
+            if (!this.shopScroll) {
+              this.shopScroll = new BScroll(this.$refs.listContent, {
+                click: true
+              })
+            } else {
+              this.shopScroll.refresh();
+            }
+          });
+        }
+        return show;
+      }
+    }
+  },
+  methods: {
+    // 是否展示购物车详情
+    toggleList() {
+      if (!this.totalCount) {
+        return false;
+      } else {
+        this.fold = !this.fold;
+      }
+    },
+    // 控制蒙版
+    hideMask() {
+      this.fold = true;
+    },
+    // 清除所有商品
+    clearAll() {
+      this.selectFoods.forEach(food => {
+        food.count = 0;
+      })
+    }
   }
+}
 </script>
 
 <style scoped>

@@ -7,14 +7,14 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      commentNum: {
-        type: Number,
-        default: 0
-      }
+export default {
+  props: {
+    commentNum: {
+      type: Number,
+      default: 0
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

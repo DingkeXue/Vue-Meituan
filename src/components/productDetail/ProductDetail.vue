@@ -70,49 +70,49 @@
 </template>
 
 <script>
-  import BScroll from 'better-scroll'
-  import Vue from 'vue'
-  import Split from '../split/Split'
-  import CartControl from '../cartcontrol/CartControl'
+import BScroll from 'better-scroll'
+import Vue from 'vue'
+import Split from '../split/Split'
+import CartControl from '../cartcontrol/CartControl'
 
-  export default {
-    data() {
-      return {
-        showFlag: false
-      }
-    },
-    components: {
-      'app-cart-control': CartControl,
-      'app-split': Split
-    },
-    props: {
-      food: {
-        type: Object
-      }
-    },
-    methods: {
-      showView() {
-        this.showFlag = true;
-        // console.log(this.food);
+export default {
+  data() {
+    return {
+      showFlag: false
+    }
+  },
+  components: {
+    'app-cart-control': CartControl,
+    'app-split': Split
+  },
+  props: {
+    food: {
+      type: Object
+    }
+  },
+  methods: {
+    showView() {
+      this.showFlag = true;
+      // console.log(this.food);
 
-        this.$nextTick(() => {
-          if (!this.BScroll) {
-            this.BScroll = new BScroll(this.$refs.foodView, {
-              click: true
-            })
-          } else {
-            this.BScroll.refresh();
-          }
-        })
-      },
-      closeView() {
-        this.showFlag = false;
-      },
-      addProduct() {
-        Vue.set(this.food, "count", 1);
-      }
+      this.$nextTick(() => {
+        if (!this.BScroll) {
+          this.BScroll = new BScroll(this.$refs.foodView, {
+            click: true
+          })
+        } else {
+          this.BScroll.refresh();
+        }
+      })
+    },
+    closeView() {
+      this.showFlag = false;
+    },
+    addProduct() {
+      Vue.set(this.food, "count", 1);
     }
   }
+}
 </script>
 
 <style scoped>
@@ -134,7 +134,7 @@
   .img-wrapper .food-img {
     width: 100%;
   }
-  
+
   .food-img {
     position: absolute;
     left: 0;
@@ -147,7 +147,7 @@
     height: 0;
     padding-top: 100%;
   }
-  
+
   .img-wrapper .close-bt {
     width: 30px;
     height: 30px;
